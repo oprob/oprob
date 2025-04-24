@@ -1,0 +1,67 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "socks",
+      "settings": {
+        "servers": [
+          {
+            "address": "gb.4g.iproyal.com",
+            "port": 3004,
+            "users": [
+              {
+                "user": "FLdGkH0",
+                "pass": "j47IK6LuVxxD3lU"
+              }
+            ]
+          }
+        ]
+      },
+      "tag": "proxy"
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "8.8.8.8",
+      "localhost"
+    ]
+  },
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "domain": [
+          "geosite:netflix",
+          "geosite:youtube",
+          "geosite:github"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "ip": [
+          "geoip:us",
+          "geoip:gb"
+        ]
+      }
+    ]
+  }
+}
